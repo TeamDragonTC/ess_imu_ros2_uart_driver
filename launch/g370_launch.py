@@ -9,7 +9,7 @@ def generate_launch_description():
     return LaunchDescription([
         DeclareLaunchArgument(
             name="serial_port",
-            default_value="/dev/ttyUSB0",
+            default_value="/dev/imu",
             description="Serial port name"),
         DeclareLaunchArgument(
             name="frame_id",
@@ -17,7 +17,7 @@ def generate_launch_description():
             description="imu message frame_id field"),
         DeclareLaunchArgument(
             name="imu_topic",
-            default_value="/epson_imu/data_raw",
+            default_value="/imu",
             description="topic name for publishing imu messages."),
         DeclareLaunchArgument(
             name="burst_polling_rate",
@@ -83,7 +83,7 @@ def generate_launch_description():
             description="Enables using IMU external trigger function for sending IMU samples with external trigger signal connected to IMU input pin for GPIO2/EXT"),
         launch_ros.actions.Node(
             package='epson_imu_uart_ros2',
-            node_executable='imu_node',
+            executable='imu_node',
             output='screen',
             parameters=[{'__log_level': 'INFO',
                 'serial_port': LaunchConfiguration("serial_port"),
